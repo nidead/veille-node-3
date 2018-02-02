@@ -1,27 +1,24 @@
 
 var http = require("http");
+const fs = require("fs");
+let data = fs.readFileSync('pro.json');
+let obj = JSON.parse(data)
 var server = http.createServer(function(request, response) {
 'use strict';
 /* 
 on définit un Object litéral qui contient l'ensemble des provinces 
 */
-let oProvince = {   
-                "QC" : "Québec",
-                 "ON" : "Ontario",
-                 "MA" : "Manitoba",
-                 "SK" : "Saskashewan",
-                 "AL" : "Alberta",
-                 "NF" : "Terre-Neuve",
-                 "NB" : "Nouveau-Brunswick"
-                }
+let oProvince = obj;
 /* 
+
+
 permet d'extraire l'ensemble des propriétés valeurs de l'objet litéral */
 
  const contenu_objet_json =(o)=>{
 
    let trace = '<table><tr><td><h3>Acronyme</h3></td><td><h3>Nom de la province</h3></td></tr>';
    for (let p in o) { 
-     trace += '<tr><td>'+p + '</td><td>' + o[p] + '</td>'; 
+     trace += '<tr><td>'+p + '</td><td>' + o[p] + '</td></tr>'; 
    } 
    return trace+='</table>';
    }
